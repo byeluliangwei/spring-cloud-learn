@@ -1,0 +1,44 @@
+server:
+  port: 6024
+
+spring:
+  # profiles: secure
+  security:
+    user:
+      name: "user"
+      password: "password"
+   
+---
+spring:
+  boot:
+    admin:
+      client:
+        url: http://${spring.security.user.name}:${spring.security.user.password}@10.10.9.157:6024
+        username: "user"
+        password: "password"
+        instance:
+          metadata:
+            user.name: "user"
+            user.password: "password"
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+info:
+  version: '@project.version@'
+        
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@10.10.9.222:5683/eureka/
+  instance:
+    metadata-map:
+      user.name: "user"
+      user.pasword: "password"

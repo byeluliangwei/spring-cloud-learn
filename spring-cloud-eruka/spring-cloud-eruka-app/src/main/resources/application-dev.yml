@@ -1,0 +1,26 @@
+# 服务端口
+server:
+  port: 4024
+
+# 服务安全配置
+spring:
+  security:
+    user:
+      name: eureka
+      password: 123456a
+  profiles:
+    active:
+    - signle
+    
+eureka:
+  # eureka实例配置
+  instance:
+    hostname: localhost
+    instance-id: ${random.uuid}(${spring.application.name}::${eureka.instance.hostname}:${server.port})
+  # eureka客户端配置
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    registry-fetch-interval-seconds: 5
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@localhost:4024/eureka/

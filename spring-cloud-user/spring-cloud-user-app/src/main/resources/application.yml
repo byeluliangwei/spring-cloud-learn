@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: luliangwei-mss-user
+  profiles:
+    active: dev
